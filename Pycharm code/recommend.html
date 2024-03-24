@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: #2c3e50; /* Dark background color */
+        color: #ecf0f1; /* Light text color */
+    }
+
+    .navbar {
+        background-color: white !important; /* Header background color (changed to a different green) */
+        color: #ecf0f1; /* Header text color */
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    input.form-control {
+        width: 70%;
+        display: inline-block;
+    }
+
+    input.btn {
+        width: 28%;
+        display: inline-block;
+    }
+
+    .card {
+        background-color: #34495e; /* Card background color */
+        color: #ecf0f1; /* Card text color */
+        margin-top: 20px;
+        transition: transform 0.3s; /* Add a smooth transition effect to the cards */
+    }
+
+    .card:hover {
+        transform: scale(1.05); /* Enlarge the card on hover */
+    }
+
+    .card img {
+        max-height: 200px;
+        object-fit: cover;
+    }
+</style>
+<body>
+
+    <nav class="navbar">
+        <a class="navbar-brand">My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a>Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Recommend Books</h1>
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter your preferences..."><br>
+                    <input type="submit" class="btn btn-lg btn-warning" value="Recommend">
+                </form>
+            </div>
+
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img class="card-img-top" src="{{i[2]}}">
+                            <div class="card-body">
+                                <p>{{i[0]}}</p>
+                                <h4>{{i[1]}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
